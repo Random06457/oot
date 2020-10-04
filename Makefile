@@ -20,7 +20,8 @@ MAKE = make
 CPPFLAGS = -P
 
 ifeq ($(OS),Windows_NT)
-    $(error Native Windows builds not yet supported. Please use WSL, Docker or a Linux VM)
+#    $(error Native Windows builds not yet supported. Please use WSL, Docker or a Linux VM)
+	DETECTED_OS=windows
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
@@ -92,11 +93,11 @@ ELF := $(ROM:.z64=.elf)
 # description of ROM segments
 SPEC := spec
 
-SRC_DIRS := $(shell find src -type d)
-ASM_DIRS := $(shell find asm -type d -not -path "asm/non_matchings*") $(shell find data -type d)
-SCENE_DIRS := $(shell find scenes -type d -not -path "scenes/xml*")
+SRC_DIRS := $(shell lfind src -type d)
+ASM_DIRS := $(shell lfind asm -type d -not -path "asm/non_matchings*") $(shell lfind data -type d)
+SCENE_DIRS := $(shell lfind scenes -type d -not -path "scenes/xml*")
 TEXTURE_DIRS := assets/textures
-TEXTURE_BIN_DIRS := $(shell find assets/textures/* -type d -not -path "assets/textures/xml*")
+TEXTURE_BIN_DIRS := $(shell lfind assets/textures/* -type d -not -path "assets/textures/xml*")
 
 # source files
 C_FILES       := $(foreach dir,$(SRC_DIRS) $(TEXTURE_BIN_DIRS) $(SCENE_DIRS),$(wildcard $(dir)/*.c))
