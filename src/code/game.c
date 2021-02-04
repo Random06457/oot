@@ -1,18 +1,11 @@
 #include "global.h"
 #include "vt.h"
 
-typedef struct {
-    /* 0x0000 */ OSViMode viMode;
-    /* 0x0050 */ char unk_50[0x30];
-    /* 0x0080 */ u32 viFeatures;
-    /* 0x0084 */ char unk_84[4];
-} unk_80166528;
-
 SpeedMeter D_801664D0;
 struct_801664F0 D_801664F0;
 struct_80166500 D_80166500;
 VisMono sMonoColors;
-unk_80166528 D_80166528;
+ViModeContext sViModeCtx;
 FaultClient sGameFaultClient;
 u16 sLastButtonPressed;
 
@@ -255,9 +248,9 @@ void GameState_Update(GameState* gameState) {
             gfxCtx->xScale = gViConfigXScale;
             gfxCtx->yScale = gViConfigYScale;
         } else if (SREG(48) > 0) {
-            func_800ACAF8(&D_80166528, gameState->input, gfxCtx);
-            gfxCtx->viMode = &D_80166528.viMode;
-            gfxCtx->viFeatures = D_80166528.viFeatures;
+            func_800ACAF8(&sViModeCtx, gameState->input, gfxCtx);
+            gfxCtx->viMode = &sViModeCtx.viMode;
+            gfxCtx->viFeatures = sViModeCtx.viFeatures;
             gfxCtx->xScale = 1.0f;
             gfxCtx->yScale = 1.0f;
         }
@@ -421,7 +414,7 @@ void GameState_Init(GameState* gameState, GameStateFunc init, GraphicsContext* g
     func_800AD920(&D_80166500);
     VisMono_Init(&sMonoColors);
     if (SREG(48) == 0) {
-        func_800ACA28(&D_80166528);
+        func_800ACA28(&sViModeCtx);
     }
     SpeedMeter_Init(&D_801664D0);
     func_800AA0B4();
@@ -453,7 +446,7 @@ void GameState_Destroy(GameState* gameState) {
     func_800AD950(&D_80166500);
     VisMono_Destroy(&sMonoColors);
     if (SREG(48) == 0) {
-        func_800ACA90(&D_80166528);
+        func_800ACA90(&sViModeCtx);
     }
     THA_Dt(&gameState->tha);
     GameAlloc_Cleanup(&gameState->alloc);

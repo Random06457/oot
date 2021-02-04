@@ -170,6 +170,7 @@ build/src/overlays/actors/%.o: CC := python3 tools/asm_processor/build.py $(CC) 
 build/src/overlays/effects/%.o: CC := python3 tools/asm_processor/build.py $(CC) -- $(AS) $(ASFLAGS) --
 build/src/overlays/gamestates/%.o: CC := python3 tools/asm_processor/build.py $(CC) -- $(AS) $(ASFLAGS) --
 
+build/src/code/z_vimode.o: CC := $(CC)
 #### Main Targets ###
 
 all: $(ROM)

@@ -3336,7 +3336,6 @@ extern SpeedMeter gSpeedMeter;
 //extern ? D_801664F0;
 //extern ? D_80166500;
 //extern ? D_80166510;
-//extern ? D_80166528;
 //extern ? D_801665B0;
 //extern ? D_801665C0;
 //extern ? D_801665D0;

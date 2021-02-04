@@ -1744,4 +1744,22 @@ typedef struct {
     /* 0x04 */ const char* name;
 } FlagSetEntry; // size = 0x08
 
+typedef struct {
+    /* 0x00 */ OSViMode viMode;
+    /* 0x50 */ s32 height;
+    /* 0x54 */ s32 width;
+    /* 0x58 */ s32 unk_58;
+    /* 0x5C */ s32 unk_5C;
+    /* 0x60 */ s32 unk_60;
+    /* 0x64 */ s32 unk_64;
+    /* 0x68 */ s32 unk_68;
+    /* 0x6C */ s32 tvType;
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ s32 unk_74;
+    /* 0x78 */ s32 unk_78;
+    /* 0x7C */ s32 unk_7C;
+    /* 0x80 */ u32 viFeatures;
+    /* 0x84 */ char unk_84[4];
+} ViModeContext; // size = 0x84
+
 #endif
